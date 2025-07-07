@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Serviços{% endblock %}
+
+{% block conteudo %}
+<h2>Serviços Cadastrados</h2>
+
+<a href="{{ url_for('servicos.criar_servico') }}">
+    <button>Novo Serviço</button>
+</a>
+
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Serviço</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Status</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for servico in servicos %}
+        <tr>
+            <td>{{ servico.id }}</td>
+            <td>{{ servico.servico }}</td>
+            <td>{{ servico.descricao }}</td>
+            <td>R$ {{ "%.2f"|format(servico.preco or 0) }}</td>
+            <td>{{ servico.status }}</td>
+            <td>
+                <a href="{{ url_for('servicos.editar_servico', id=servico.id) }}">Editar</a>
+                |
+                <form action="{{ url_for('servicos.deletar_servico', id=servico.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" onclick="return confirm('Deseja excluir este serviço?')">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

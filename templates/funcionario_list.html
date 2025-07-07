@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Funcionários{% endblock %}
+
+{% block conteudo %}
+<h2>Funcionários Cadastrados</h2>
+
+<a href="{{ url_for('funcionario.criar_funcionario') }}">
+    <button>Novo Funcionário</button>
+</a>
+
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Saldo</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for func in funcionarios %}
+        <tr>
+            <td>{{ func.id }}</td>
+            <td>{{ func.nome }}</td>
+            <td>{{ func.telefone }}</td>
+            <td>R$ {{ "%.2f"|format(func.saldo or 0) }}</td>
+            <td>
+                <a href="{{ url_for('funcionario.modificar_funcionario', id=func.id) }}">Editar</a>
+                |
+                <form action="{{ url_for('funcionario.deletar_funcionario', id=func.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" onclick="return confirm('Deseja excluir este funcionário?')">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

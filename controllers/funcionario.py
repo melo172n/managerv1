@@ -5,7 +5,7 @@ from models.models import db, Funcionario
 funcionario_bp = Blueprint('funcionario', __name__, url_prefix="/funcionarios")
 
 @funcionario_bp.route("/")
-def listar_funcionarios():
+def listar():
     funcionarios = Funcionario.query.all()
     return render_template("funcionario_list.html", funcionarios = funcionarios)
 
@@ -18,7 +18,7 @@ def criar_funcionario():
         funcionario = Funcionario(nome=nome_funcionario, saldo = saldo_funcionario, telefone = telefone_funcionario)
         db.session.add(funcionario)
         db.session.commit()
-        return redirect(url_for("funcionario.listar"))
+        return redirect(url_for("funcionario.criar_funcionario"))
     return render_template("funcionario_form.html")
 
 @funcionario_bp.route("/delete-funcionario", methods = ["GET", "POST"])
@@ -27,7 +27,7 @@ def deletar_funcionario(id):
         funcionario = Funcionario.query.all(id)
         db.session.delete(funcionario)
         db.session.commit()
-        return redirect(url_for("funcionario.listar.html"))
+        return redirect(url_for("funcionario.deletar_funcionario"))
     return render_template("funcionario_form.html")
 
 @funcionario_bp.route("/modificar-funcionario", methods = ["GET", "PUT"])
@@ -37,6 +37,6 @@ def modificar_funcionario(id):
         funcionario.nome = request.form["nome"]
         funcionario.saldo = float(request.form["saldo"])
         db.session.commit()
-        return redirect(url_for("funcionario.listar.html"))
+        return redirect(url_for("funcionario.modificar_funcionario"))
     return render_template("funcionario_form.html")
 

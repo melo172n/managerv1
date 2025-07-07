@@ -16,7 +16,7 @@ def criar_cliente():
         cliente = Cliente(nome = nome_cliente, telefone = telefone_cliente)
         db.session.add(cliente)
         db.session.commit()
-        return redirect(url_for("cliente.listar.html"))
+        return redirect(url_for("cliente.criar_cliente"))
     return render_template("cliente_form.html")
 
 @cliente_bp.route("/deletar-cliente", methods = ["GET", "POST"])
@@ -25,7 +25,7 @@ def deletar_cliente():
         cliente = Cliente.query.all(id)
         db.session.delete(cliente)
         db.session.commit()
-        return redirect(url_for("cliente.listar.html"))
+        return redirect(url_for("cliente.deletar_cliente"))
     return render_template("cliente_form.html")
 
 @cliente_bp.route("/modificar-cliente", methods = ["GET", "POST"])
@@ -35,7 +35,7 @@ def modificar_cliente():
         cliente.nome = request.form["nome"]
         cliente.telefone = request.form["telefone"]
         db.session.commit()
-        return redirect(url_for("cliente.listar.html"))
+        return redirect(url_for("cliente.modificar_cliente"))
     return render_template("cliente_form.html")
 
 
