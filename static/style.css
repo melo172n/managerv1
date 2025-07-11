@@ -19,6 +19,53 @@ nav a {
     text-decoration: none;
 }
 
+.cliente-lista {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.cliente-lista h2 {
+    color: #0066cc;
+    margin-bottom: 20px;
+}
+
+.tabela-clientes {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela-clientes th, .tabela-clientes td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.tabela-clientes th {
+    background-color: #0066cc;
+    color: white;
+}
+
+.botao-novo {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.botao-novo:hover {
+    background-color: #218838;
+}
+
+
 main {
     padding: 20px;
 }
+
+

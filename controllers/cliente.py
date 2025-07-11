@@ -19,10 +19,10 @@ def criar_cliente():
         return redirect(url_for("cliente.criar_cliente"))
     return render_template("cliente_form.html")
 
-@cliente_bp.route("/deletar-cliente", methods = ["GET", "POST"])
-def deletar_cliente():
+@cliente_bp.route("/deletar-cliente/<int:id>", methods = ["GET", "POST"])
+def deletar_cliente(id):
     if request.method == "POST":
-        cliente = Cliente.query.all(id)
+        cliente = Cliente.query.get_or_404(id)
         db.session.delete(cliente)
         db.session.commit()
         return redirect(url_for("cliente.deletar_cliente"))

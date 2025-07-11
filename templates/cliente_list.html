@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 
-{% block titulo %}Clientes Cadastrados{% endblock %}
+{% block titulo %}Clientes{% endblock %}
 
 {% block conteudo %}
+<div class="cliente-lista">
     <h2>Clientes</h2>
 
     <a href="{{ url_for('cliente.criar_cliente') }}">
-        <button>Novo Cliente</button>
+        <button class="botao-novo">Novo Cliente</button>
     </a>
 
-    <table border="1" cellpadding="5" cellspacing="0">
+    <table class="tabela-clientes">
         <thead>
             <tr>
                 <th>ID</th>
@@ -20,19 +21,20 @@
         </thead>
         <tbody>
             {% for cliente in clientes %}
-                <tr>
-                    <td>{{ cliente.id }}</td>
-                    <td>{{ cliente.nome }}</td>
-                    <td>{{ cliente.telefone }}</td>
-                    <td>
-                        <a href="{{ url_for('cliente.modificar_cliente', id=cliente.id) }}">Editar</a>
-                        |
-                        <form action="{{ url_for('cliente.deletar_cliente', id=cliente.id) }}" method="POST" style="display:inline;">
-                            <button type="submit" onclick="return confirm('Deseja realmente excluir este cliente?')">Excluir</button>
-                        </form>
-                    </td>
-                </tr>
+            <tr>
+                <td>{{ cliente.id }}</td>
+                <td>{{ cliente.nome_cliente }}</td>
+                <td>{{ cliente.telefone_cliente }}</td>
+                <td>
+                    <a href="{{ url_for('cliente.modificar_cliente', id=cliente.id) }}">Editar</a>
+                    |
+                    <form action="{{ url_for('cliente.deletar_cliente', id=cliente.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Deseja excluir este cliente?')">Excluir</button>
+                    </form>
+                </td>
+            </tr>
             {% endfor %}
         </tbody>
     </table>
+</div>
 {% endblock %}

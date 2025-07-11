@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block titulo %}{{ "Editar" if cliente else "Novo" }} Cliente{% endblock %}
+
+{% block conteudo %}
+<h2>{{ "Editar" if cliente else "Novo" }} Cliente</h2>
+
+<form method="POST">
+    <label for="nome_cliente">Nome:</label><br>
+    <input type="text" id="nome_cliente" name="nome" required value="{{ cliente.nome_cliente if cliente else '' }}"><br><br>
+
+    <label for="telefone_cliente">Telefone:</label><br>
+    <input type="text" id="telefone_cliente" name="telefone" required value="{{ cliente.telefone_cliente if cliente else '' }}"><br><br>
+
+    <button type="submit">Salvar</button>
+</form>
+{% endblock %}
